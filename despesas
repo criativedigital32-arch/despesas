@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Controle Financeiro Mobile</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 0;
+        background: #f3f6fa;
+      }
+      header {
+        background: #0066b3;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+      }
+      .wrap {
+        padding: 12px;
+      }
+      .card {
+        background: #fff;
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin: 4px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+      button {
+        background: #0066b3;
+        color: #fff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+        }
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 6px;
+      }
+      th {
+        background: #e74c3c;
+        color: #fff;
+      }
+      .green th {
+        background: #16a34a;
+      }
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #16a34a;
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h2>Planilha Financeira</h2></header>
+    <div class="wrap">
+      <div class="card">
+        <label>Mês</label>
+        <select id="mes"></select>
+        <label>Total de Entradas</label>
+        <input id="entrada" type="number" step="0.01" placeholder="Digite o valor total" />
+        <button onclick="salvarEntrada()">Salvar Entradas</button>
+      </div>
+      <div class="card">
+        <b>Saídas:</b>
+        <span id="saidas">R$0,00</span>
+        <br />
+        <b>Saldo:</b>
+        <span id="saldo">R$0,00</span>
+      </div>
+      <div class="card">
+        <input id="data" type="date" />
+        <select id="tipo">
+          <option>Receita</option>
+          <option>Despesa</option>
+        </select>
+        <input id="descricao" placeholder="Descrição" />
+        <input id="valor" type="number" step="0.01" placeholder="Valor" />
+        <select id="parcela">
+          <option>FIXO</option>
+          <option>VARIÁVEL</option>
+          <option>1x</option>
+          <option>2x</option>
+          <option>3x</option>
+          <option>6x</option>
+          <option>8x</option>
+          <option>10x</option>
+        </select>
+        <button onclick="add()">Adicionar</button>
+        <button onclick="undo()">Desfazer</button>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <table class="green">
+            <thead>
+              <tr>
+                <th>Receitas</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody id="trec"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <table>
+            <thead>
+              <tr>
+                <th>Despesa</th>
+                <th>Valor</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="tdes"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="msg"></div>
+    </div>
+    <script>
+      const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+      let ano = new Date().getFullYear();
+      let db = JSON.parse(localStorage.getItem("dbfin")) || {};
+      meses.forEach((m) => {
+        let k = m + ano;
+        if (!db[k]) db[k] = { entrada: 0, receitas: [], despesas: [] };
+        mes.innerHTML += `<option value='${k}'>${k}</option>`;
+      });
+      mes.value = "OUT" + ano;
+      let last = null;
+      function cur() {
+        return db[mes.value];
+      }
+      function save() {
+        localStorage.setItem("dbfin", JSON.stringify(db));
+      }
+      function toast(t) {
+        msg.innerHTML = "<div class=toast>" + t + "</div>";
+        setTimeout(() => (msg.innerHTML = ""), 2000);
+      }
+      mes.onchange = render;
+      function salvarEntrada() {
+        cur().entrada = Number(entrada.value || 0);
+        save();
+        render();
+        toast("Entradas salvas");
+      }
+      function add() {
+        let o = {
+          data: data.value,
+          descricao: descricao.value,
+          valor: Number(valor.value || 0),
+          parcela: parcela.value,
+        };
+        if (tipo.value == "Receita") cur().receitas.push(o);
+        else cur().despesas.push(o);
+        save();
+        render();
+        toast("Lançamento salvo");
+      }
+      function del(i) {
+        if (!confirm("Excluir despesa?")) return;
+        last = { t: "del", i: i, obj: { ...cur().despesas[i] } };
+        cur().despesas.splice(i, 1);
+        save();
+        render();
+        toast("Despesa excluída");
+      }
+      function edit(i, v) {
+        last = { t: "edit", i: i, obj: { ...cur().despesas[i] } };
+        cur().despesas[i].valor = Number(v);
+        save();
+        render();
+      }
+      function undo() {
+        if (!last) return;
+        if (last.t == "del") cur().despesas.splice(last.i, 0, last.obj);
+        if (last.t == "edit") cur().despesas[last.i] = last.obj;
+        save();
+        render();
+        toast("Desfeito");
+        last = null;
+      }
+      function br(v) {
+        return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+      }
+      function render() {
+        entrada.value = cur().entrada;
+        trec.innerHTML = "";
+        tdes.innerHTML = "";
+        let s = 0;
+        cur().receitas.forEach((r) => (trec.innerHTML += `<tr><td>${r.descricao}</td><td>${br(r.valor)}</td></tr>`));
+        cur().despesas.forEach((d, i) => {
+          s += Number(d.valor);
+          tdes.innerHTML += `<tr><td>${d.descricao}</td><td><input type=number value='${d.valor}' onchange='edit(${i},this.value)'></td><td><button onclick='del(${i})'>🗑</button></td></tr>`;
+        });
+        saidas.innerText = br(s);
+        saldo.innerText = br(Number(cur().entrada) - s);
+      }
+      render();
+    </script>
+  </body>
+</html>
