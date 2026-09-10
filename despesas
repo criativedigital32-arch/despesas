@@ -3,216 +3,223 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Controle Financeiro</title>
+<title>Controle Financeiro</title>
 
-  <style>
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f3f6fa;
-      color: #222;
-    }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f3f6fa;
+  color: #222;
+}
 
-    header {
-      background: #0066b3;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
+header {
+  background: #0066b3;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
 
-    header h2 {
-      margin: 0;
-    }
+header h2 {
+  margin: 0;
+}
 
-    .wrap {
-      max-width: 1100px;
-      margin: auto;
-      padding: 12px;
-    }
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 12px;
+}
 
-    .card {
-      background: white;
-      padding: 14px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.10);
-    }
+.card {
+  background: white;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-top: 6px;
-      margin-bottom: 4px;
-    }
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
 
-    input,
-    select,
-    button {
-      width: 100%;
-      padding: 12px;
-      margin: 4px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
+input,
+select,
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
 
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: #0066b3;
-    }
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #0066b3;
+}
 
-    button {
-      background: #0066b3;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
+button {
+  background: #0066b3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    button:hover {
-      opacity: 0.90;
-    }
+button:hover {
+  opacity: 0.90;
+}
 
-    .btn-desfazer {
-      background: #777;
-    }
+.btn-desfazer {
+  background: #777;
+}
 
-    .btn-delete {
-      width: auto;
-      min-width: 45px;
-      background: #dc2626;
-      padding: 8px 10px;
-      margin: 0;
-    }
+.btn-exportar {
+  background: #10b981;
+  margin-top: 10px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
-    }
+.btn-delete {
+  width: auto;
+  min-width: 45px;
+  background: #dc2626;
+  padding: 8px 10px;
+  margin: 0;
+}
 
-    @media (min-width: 900px) {
+.btn-edit {
+  width: auto;
+  min-width: 45px;
+  background: #f59e0b;
+  padding: 8px 10px;
+  margin: 0;
+}
 
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
+.acoes {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
 
-    }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
 
-    .filtros {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
+.filtros {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 7px;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
 
-    th {
-      background: #e74c3c;
-      color: white;
-      text-align: left;
-    }
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 7px;
+}
 
-    .green th {
-      background: #16a34a;
-    }
+th {
+  background: #e74c3c;
+  color: white;
+  text-align: left;
+}
 
-    .resumo {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
+.green th {
+  background: #16a34a;
+}
 
-    .resumo-item {
-      padding: 12px;
-      border-radius: 8px;
-      background: #f5f5f5;
-    }
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
 
-    .resumo-item strong {
-      display: block;
-      margin-bottom: 6px;
-    }
+.resumo-item {
+  padding: 12px;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
 
-    .resumo-saldo {
-      background: #e8f5e9;
-    }
+.resumo-item strong {
+  display: block;
+  margin-bottom: 6px;
+}
 
-    .despesa-input {
-      width: 100%;
-      padding: 7px;
-      margin: 0;
-      font-size: 14px;
-    }
+.resumo-saldo {
+  background: #e8f5e9;
+}
 
-    .vazio {
-      text-align: center;
-      color: #777;
-      padding: 15px;
-    }
+.vazio {
+  text-align: center;
+  color: #777;
+  padding: 15px;
+}
 
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #16a34a;
-      color: white;
-      padding: 11px 18px;
-      border-radius: 8px;
-      z-index: 9999;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-    }
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #16a34a;
+  color: white;
+  padding: 11px 18px;
+  border-radius: 8px;
+  z-index: 9999;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+}
 
-    .data-coluna {
-      white-space: nowrap;
-    }
+.data-coluna {
+  white-space: nowrap;
+}
 
-    @media (max-width: 600px) {
+@media (max-width: 600px) {
 
-      .resumo {
-        grid-template-columns: 1fr;
-      }
+  .resumo {
+    grid-template-columns: 1fr;
+  }
 
-      .filtros {
-        grid-template-columns: 1fr 1fr;
-      }
+  .filtros {
+    grid-template-columns: 1fr 1fr;
+  }
 
-      table {
-        font-size: 12px;
-      }
+  table {
+    font-size: 12px;
+  }
 
-      th,
-      td {
-        padding: 5px;
-      }
+  th,
+  td {
+    padding: 5px;
+  }
 
-    }
+}
 
-  </style>
+</style>
 
 </head>
 
@@ -220,1279 +227,830 @@
 <body>
 
 <header>
-
   <h2>Planilha Financeira</h2>
-
 </header>
 
 
 <div class="wrap">
 
 
-  <!-- =========================
-       SELEÇÃO DO PERÍODO
-  ========================== -->
+<!-- =========================
+     SELEÇÃO DO PERÍODO
+========================= -->
 
-  <div class="card">
+<div class="card">
 
-    <div class="filtros">
+  <div class="filtros">
 
-      <div>
+    <div>
 
-        <label for="mes">
-          Mês
-        </label>
+      <label for="mes">
+        Mês
+      </label>
 
-        <select id="mes">
+      <select id="mes">
 
-          <option value="1">Janeiro</option>
-          <option value="2">Fevereiro</option>
-          <option value="3">Março</option>
-          <option value="4">Abril</option>
-          <option value="5">Maio</option>
-          <option value="6">Junho</option>
-          <option value="7">Julho</option>
-          <option value="8">Agosto</option>
-          <option value="9">Setembro</option>
-          <option value="10">Outubro</option>
-          <option value="11">Novembro</option>
-          <option value="12">Dezembro</option>
+        <option value="1">Janeiro</option>
+        <option value="2">Fevereiro</option>
+        <option value="3">Março</option>
+        <option value="4">Abril</option>
+        <option value="5">Maio</option>
+        <option value="6">Junho</option>
+        <option value="7">Julho</option>
+        <option value="8">Agosto</option>
+        <option value="9">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
 
-        </select>
+      </select>
 
-      </div>
+    </div>
 
 
-      <div>
+    <div>
 
-        <label for="ano">
-          Ano
-        </label>
+      <label for="ano">
+        Ano
+      </label>
 
-        <select id="ano"></select>
-
-      </div>
+      <select id="ano"></select>
 
     </div>
 
   </div>
 
-
-  <!-- =========================
-       ENTRADAS
-  ========================== -->
-
-  <div class="card">
-
-    <label for="entrada">
-
-      Total de Entradas
-
-    </label>
-
-    <input
-      id="entrada"
-      type="number"
-      step="0.01"
-      min="0"
-      placeholder="Digite o valor total"
-    >
-
-    <button id="btnSalvarEntrada">
-
-      Salvar Entradas
-
-    </button>
-
-  </div>
+</div>
 
 
-  <!-- =========================
-       RESUMO
-  ========================== -->
+<!-- =========================
+     ENTRADAS
+========================= -->
 
-  <div class="card">
+<div class="card">
 
-    <div class="resumo">
+  <label for="entrada">
+    Total de Entradas Fixas
+  </label>
 
-      <div class="resumo-item">
+  <input
+    id="entrada"
+    type="text"
+    inputmode="decimal"
+    placeholder="Digite o valor total"
+  >
 
-        <strong>
-          Entradas
-        </strong>
+  <button
+    type="button"
+    id="btnSalvarEntrada"
+  >
+    Salvar Entradas
+  </button>
 
-        <span id="totalEntradas">
-          R$ 0,00
-        </span>
+  <button
+    type="button"
+    id="btnExportarCSV"
+    class="btn-exportar"
+  >
+    📊 Exportar Mês Atual (CSV)
+  </button>
 
-      </div>
-
-
-      <div class="resumo-item">
-
-        <strong>
-          Saídas
-        </strong>
-
-        <span id="saidas">
-          R$ 0,00
-        </span>
-
-      </div>
+</div>
 
 
-      <div class="resumo-item resumo-saldo">
+<!-- =========================
+     RESUMO
+========================= -->
 
-        <strong>
-          Saldo
-        </strong>
+<div class="card">
 
-        <span id="saldo">
-          R$ 0,00
-        </span>
+  <div class="resumo">
 
-      </div>
+    <div class="resumo-item">
+
+      <strong>
+        Entradas Total
+      </strong>
+
+      <span id="totalEntradas">
+        R$ 0,00
+      </span>
+
+    </div>
+
+
+    <div class="resumo-item">
+
+      <strong>
+        Saídas Total
+      </strong>
+
+      <span id="saidas">
+        R$ 0,00
+      </span>
+
+    </div>
+
+
+    <div class="resumo-item resumo-saldo">
+
+      <strong>
+        Saldo
+      </strong>
+
+      <span id="saldo">
+        R$ 0,00
+      </span>
 
     </div>
 
   </div>
 
+</div>
 
-  <!-- =========================
-       NOVO LANÇAMENTO
-  ========================== -->
 
-  <div class="card">
+<!-- =========================
+     NOVO LANÇAMENTO
+========================= -->
 
-    <h3>
-      Novo Lançamento
-    </h3>
+<div class="card">
 
+  <h3>
+    Novo Lançamento
+  </h3>
 
-    <label for="data">
 
-      Data do lançamento
+  <label for="data">
+    Data do lançamento
+  </label>
 
-    </label>
+  <input
+    id="data"
+    type="date"
+  >
 
-    <input
-      id="data"
-      type="date"
-    >
 
+  <label for="tipo">
+    Tipo
+  </label>
 
-    <label for="tipo">
+  <select id="tipo">
 
-      Tipo
+    <option value="Receita">
+      Receita
+    </option>
 
-    </label>
+    <option value="Despesa">
+      Despesa
+    </option>
 
-    <select id="tipo">
+  </select>
 
-      <option value="Receita">
-        Receita
-      </option>
 
-      <option value="Despesa">
-        Despesa
-      </option>
+  <label for="descricao">
+    Descrição
+  </label>
 
-    </select>
+  <input
+    id="descricao"
+    type="text"
+    placeholder="Descrição"
+  >
 
 
-    <label for="descricao">
+  <label for="valor">
+    Valor
+  </label>
 
-      Descrição
+  <input
+    id="valor"
+    type="text"
+    inputmode="decimal"
+    placeholder="Valor (ex: 150.00 ou 150,00)"
+  >
 
-    </label>
 
-    <input
-      id="descricao"
-      type="text"
-      placeholder="Descrição"
-    >
+  <label for="parcela">
+    Categoria / Parcela
+  </label>
 
+  <select id="parcela">
 
-    <label for="valor">
+    <option value="FIXO">
+      FIXO
+    </option>
 
-      Valor
+    <option value="VARIÁVEL">
+      VARIÁVEL
+    </option>
 
-    </label>
+    <option value="1x">
+      1x
+    </option>
 
-    <input
-      id="valor"
-      type="number"
-      step="0.01"
-      min="0"
-      placeholder="Valor"
-    >
+    <option value="2x">
+      2x
+    </option>
 
+    <option value="3x">
+      3x
+    </option>
 
-    <label for="parcela">
+    <option value="4x">
+      4x
+    </option>
 
-      Categoria / Parcela
+    <option value="5x">
+      5x
+    </option>
 
-    </label>
+    <option value="6x">
+      6x
+    </option>
 
-    <select id="parcela">
+    <option value="7x">
+      7x
+    </option>
 
-      <option value="FIXO">
-        FIXO
-      </option>
+    <option value="8x">
+      8x
+    </option>
 
-      <option value="VARIÁVEL">
-        VARIÁVEL
-      </option>
+    <option value="9x">
+      9x
+    </option>
 
-      <option value="1x">
-        1x
-      </option>
+    <option value="10x">
+      10x
+    </option>
 
-      <option value="2x">
-        2x
-      </option>
+    <option value="11x">
+      11x
+    </option>
 
-      <option value="3x">
-        3x
-      </option>
+    <option value="12x">
+      12x
+    </option>
 
-      <option value="6x">
-        6x
-      </option>
+  </select>
 
-      <option value="8x">
-        8x
-      </option>
 
-      <option value="10x">
-        10x
-      </option>
+  <button
+    type="button"
+    id="btnAdicionar"
+  >
+    Adicionar
+  </button>
 
-    </select>
 
+  <button
+    type="button"
+    id="btnDesfazer"
+    class="btn-desfazer"
+  >
+    Desfazer
+  </button>
 
-    <button id="btnAdicionar">
+</div>
 
-      Adicionar
 
-    </button>
+<!-- =========================
+     TABELAS
+========================= -->
 
+<div class="grid">
 
-    <button
-      id="btnDesfazer"
-      class="btn-desfazer"
-    >
 
-      Desfazer
+<!-- RECEITAS -->
 
-    </button>
+<div class="card">
 
-  </div>
+  <table class="green">
 
+    <thead>
 
-  <!-- =========================
-       TABELAS
-  ========================== -->
+      <tr>
 
-  <div class="grid">
+        <th>Data</th>
+        <th>Receita</th>
+        <th>Valor</th>
+        <th>Ação</th>
 
+      </tr>
 
-    <!-- RECEITAS -->
+    </thead>
 
-    <div class="card">
+    <tbody id="trec"></tbody>
 
-      <table class="green">
+  </table>
 
-        <thead>
+</div>
 
-          <tr>
 
-            <th>
-              Data
-            </th>
+<!-- DESPESAS -->
 
-            <th>
-              Receita
-            </th>
+<div class="card">
 
-            <th>
-              Valor
-            </th>
+  <table>
 
-            <th>
-              Ação
-            </th>
+    <thead>
 
-          </tr>
+      <tr>
 
-        </thead>
+        <th>Data</th>
+        <th>Despesa</th>
+        <th>Valor</th>
+        <th>Ação</th>
 
-        <tbody id="trec"></tbody>
+      </tr>
 
-      </table>
+    </thead>
 
-    </div>
+    <tbody id="tdes"></tbody>
 
+  </table>
 
-    <!-- DESPESAS -->
+</div>
 
-    <div class="card">
+</div>
 
-      <table>
 
-        <thead>
-
-          <tr>
-
-            <th>
-              Data
-            </th>
-
-            <th>
-              Despesa
-            </th>
-
-            <th>
-              Valor
-            </th>
-
-            <th>
-              Ação
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody id="tdes"></tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-
-  <div id="msg"></div>
-
+<div id="msg"></div>
 
 </div>
 
 
 <script>
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-
-
-    /* =========================
-       ELEMENTOS
-    ========================== */
-
-    const mes =
-      document.getElementById("mes");
-
-    const ano =
-      document.getElementById("ano");
-
-    const entrada =
-      document.getElementById("entrada");
-
-    const data =
-      document.getElementById("data");
-
-    const tipo =
-      document.getElementById("tipo");
-
-    const descricao =
-      document.getElementById("descricao");
-
-    const valor =
-      document.getElementById("valor");
-
-    const parcela =
-      document.getElementById("parcela");
-
-    const trec =
-      document.getElementById("trec");
-
-    const tdes =
-      document.getElementById("tdes");
-
-    const totalEntradas =
-      document.getElementById("totalEntradas");
-
-    const saidas =
-      document.getElementById("saidas");
-
-    const saldo =
-      document.getElementById("saldo");
-
-    const msg =
-      document.getElementById("msg");
-
-    const btnSalvarEntrada =
-      document.getElementById(
-        "btnSalvarEntrada"
-      );
-
-    const btnAdicionar =
-      document.getElementById(
-        "btnAdicionar"
-      );
-
-    const btnDesfazer =
-      document.getElementById(
-        "btnDesfazer"
-      );
-
-
-    /* =========================
-       MESES
-    ========================== */
-
-    const nomesMeses = [
-
-      "Janeiro",
-      "Fevereiro",
-      "Março",
-      "Abril",
-      "Maio",
-      "Junho",
-      "Julho",
-      "Agosto",
-      "Setembro",
-      "Outubro",
-      "Novembro",
-      "Dezembro"
-
-    ];
-
-
-    /* =========================
-       ANOS
-    ========================== */
-
-    const anoAtual =
-      new Date().getFullYear();
-
-
-    for (
-      let i = 2020;
-      i <= 2035;
-      i++
-    ) {
-
-      const option =
-        document.createElement("option");
-
-      option.value = i;
-
-      option.textContent = i;
-
-      ano.appendChild(option);
-
-    }
-
-
-    /* =========================
-       BANCO DE DADOS
-    ========================== */
-
-    let db = {};
-
-
-    try {
-
-      db =
-        JSON.parse(
-          localStorage.getItem(
-            "dbfin"
-          )
-        ) || {};
-
-    } catch (erro) {
-
-      db = {};
-
-    }
-
-
-    /* =========================
-       GARANTIR ESTRUTURA
-    ========================== */
-
-    function garantirPeriodo(
-      chave
-    ) {
-
-      if (!db[chave]) {
-
-        db[chave] = {
-
-          entrada: 0,
-
-          receitas: [],
-
-          despesas: []
-
-        };
-
-      }
-
-
-      if (
-        !Array.isArray(
-          db[chave].receitas
-        )
-      ) {
-
-        db[chave].receitas = [];
-
-      }
-
-
-      if (
-        !Array.isArray(
-          db[chave].despesas
-        )
-      ) {
-
-        db[chave].despesas = [];
-
-      }
-
-
-      return db[chave];
-
-    }
-
-
-    /* =========================
-       CHAVE DO PERÍODO
-    ========================== */
-
-    function chavePeriodo() {
-
-      return (
-        mes.value +
-        "-" +
-        ano.value
-      );
-
-    }
-
-
-    /* =========================
-       PERÍODO ATUAL
-    ========================== */
-
-    garantirPeriodo(
-      chavePeriodo()
-    );
-
-
-    /* =========================
-       SELECIONAR MÊS ATUAL
-    ========================== */
-
-    mes.value =
-      String(
-        new Date().getMonth() + 1
-      );
-
-    ano.value =
-      String(anoAtual);
-
-
-    garantirPeriodo(
-      chavePeriodo()
-    );
-
-
-    /* =========================
-       SALVAR BANCO
-    ========================== */
-
-    function salvarBanco() {
-
-      localStorage.setItem(
-        "dbfin",
-        JSON.stringify(db)
-      );
-
-    }
-
-
-    /* =========================
-       CURRENCY
-    ========================== */
-
-    function br(valor) {
-
-      return Number(
-        valor || 0
-      ).toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
-      );
-
-    }
-
-
-    /* =========================
-       DATA BRASILEIRA
-    ========================== */
-
-    function formatarData(
-      dataISO
-    ) {
-
-      if (!dataISO) {
-
-        return "-";
-
-      }
-
-
-      const partes =
-        dataISO.split("-");
-
-
-      if (
-        partes.length !== 3
-      ) {
-
-        return dataISO;
-
-      }
-
-
-      return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-      );
-
-    }
-
-
-    /* =========================
-       ESCAPE HTML
-    ========================== */
-
-    function escapeHTML(
-      texto
-    ) {
-
-      return String(
-        texto || ""
-      )
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    /* =========================
-       TOAST
-    ========================== */
-
-    function toast(
-      texto
-    ) {
-
-      msg.innerHTML =
-        '<div class="toast">' +
-        escapeHTML(texto) +
-        "</div>";
-
-
-      setTimeout(
-        function () {
-
-          msg.innerHTML = "";
-
-        },
-        2000
-      );
-
-    }
-
-
-    /* =========================
-       DATA DE HOJE
-    ========================== */
-
-    function dataHoje() {
-
-      const agora =
-        new Date();
-
-
-      const anoHoje =
-        agora.getFullYear();
-
-
-      const mesHoje =
-        String(
-          agora.getMonth() + 1
-        ).padStart(2, "0");
-
-
-      const diaHoje =
-        String(
-          agora.getDate()
-        ).padStart(2, "0");
-
-
-      return (
-        anoHoje +
-        "-" +
-        mesHoje +
-        "-" +
-        diaHoje
-      );
-
-    }
-
-
-    data.value =
-      dataHoje();
-
-
-    /* =========================
-       PERÍODO SELECIONADO
-    ========================== */
-
-    function atual() {
-
-      const chave =
-        chavePeriodo();
-
-
-      return garantirPeriodo(
-        chave
-      );
-
-    }
-
-
-    /* =========================
-       SALVAR ENTRADA
-    ========================== */
-
-    function salvarEntrada() {
-
-      atual().entrada =
-        Number(
-          entrada.value || 0
-        );
-
-
-      salvarBanco();
-
-      render();
-
-      toast(
-        "Entradas salvas!"
-      );
-
-    }
-
-
-    /* =========================
-       ADICIONAR LANÇAMENTO
-    ========================== */
-
-    function adicionar() {
-
-      const descricaoTexto =
-        descricao.value.trim();
-
-
-      const valorNumero =
-        Number(
-          valor.value || 0
-        );
-
-
-      if (!data.value) {
-
-        toast(
-          "Informe a data."
-        );
-
-        data.focus();
-
-        return;
-
-      }
-
-
-      if (!descricaoTexto) {
-
-        toast(
-          "Digite uma descrição."
-        );
-
-        descricao.focus();
-
-        return;
-
-      }
-
-
-      if (
-        valorNumero <= 0
-      ) {
-
-        toast(
-          "Digite um valor válido."
-        );
-
-        valor.focus();
-
-        return;
-
-      }
-
-
-      /*
-       * Verifica se a data pertence
-       * ao mês/ano selecionado.
-       */
-
-      const dataInformada =
-        new Date(
-          data.value + "T00:00:00"
-        );
-
-
-      const mesData =
-        dataInformada.getMonth() + 1;
-
-
-      const anoData =
-        dataInformada.getFullYear();
-
-
-      if (
-        mesData !==
-          Number(mes.value) ||
-        anoData !==
-          Number(ano.value)
-      ) {
-
-        const confirmar =
-          confirm(
-            "A data informada pertence a " +
-            nomesMeses[mesData - 1] +
-            "/" +
-            anoData +
-            ", mas o período selecionado é " +
-            nomesMeses[
-              Number(mes.value) - 1
-            ] +
-            "/" +
-            ano.value +
-            ".\n\n" +
-            "Deseja lançar mesmo assim neste período?"
-          );
-
-
-        if (!confirmar) {
-
-          return;
-
-        }
-
-      }
-
-
-      const lancamento = {
-
-        id:
-          Date.now() +
-          Math.random(),
-
-        data:
-          data.value,
-
-        descricao:
-          descricaoTexto,
-
-        valor:
-          valorNumero,
-
-        parcela:
-          parcela.value
-
+function iniciarApp() {
+
+  /* =====================================================
+     ELEMENTOS
+  ===================================================== */
+
+  const mes = document.getElementById("mes");
+  const ano = document.getElementById("ano");
+
+  const entrada = document.getElementById("entrada");
+
+  const data = document.getElementById("data");
+  const tipo = document.getElementById("tipo");
+  const descricao = document.getElementById("descricao");
+  const valor = document.getElementById("valor");
+  const parcela = document.getElementById("parcela");
+
+  const trec = document.getElementById("trec");
+  const tdes = document.getElementById("tdes");
+
+  const totalEntradas = document.getElementById("totalEntradas");
+  const saidas = document.getElementById("saidas");
+  const saldo = document.getElementById("saldo");
+  const msg = document.getElementById("msg");
+
+  const btnSalvarEntrada = document.getElementById("btnSalvarEntrada");
+  const btnExportarCSV = document.getElementById("btnExportarCSV");
+  const btnAdicionar = document.getElementById("btnAdicionar");
+  const btnDesfazer = document.getElementById("btnDesfazer");
+
+
+  /* =====================================================
+     BANCO DE DADOS
+  ===================================================== */
+
+  let db = {};
+
+  try {
+    db = JSON.parse(localStorage.getItem("dbfin")) || {};
+  } catch (erro) {
+    db = {};
+  }
+
+
+  /* =====================================================
+     CRIAR ANOS E DEFINIR DATA ATUAL
+  ===================================================== */
+
+  const agora = new Date();
+  const anoAtual = agora.getFullYear();
+
+  ano.innerHTML = "";
+  for (let i = 2020; i <= 2035; i++) {
+    const option = document.createElement("option");
+    option.value = String(i);
+    option.textContent = String(i);
+    ano.appendChild(option);
+  }
+
+  mes.value = String(agora.getMonth() + 1);
+  ano.value = String(anoAtual);
+
+  function dataHoje() {
+    const anoH = agora.getFullYear();
+    const mesH = String(agora.getMonth() + 1).padStart(2, "0");
+    const diaH = String(agora.getDate()).padStart(2, "0");
+    return anoH + "-" + mesH + "-" + diaH;
+  }
+
+  data.value = dataHoje();
+
+
+  /* =====================================================
+     FUNÇÕES AUXILIARES
+  ===================================================== */
+
+  function parseNumero(val) {
+    if (!val) return 0;
+    const limpo = String(val).replace(",", ".");
+    const num = parseFloat(limpo);
+    return isNaN(num) ? 0 : num;
+  }
+
+  function chavePeriodo() {
+    return mes.value + "-" + ano.value;
+  }
+
+  function garantirPeriodo(chave) {
+    if (!db[chave]) {
+      db[chave] = {
+        entrada: 0,
+        receitas: [],
+        despesas: []
       };
+    }
+    if (!Array.isArray(db[chave].receitas)) db[chave].receitas = [];
+    if (!Array.isArray(db[chave].despesas)) db[chave].despesas = [];
+    if (typeof db[chave].entrada !== "number") db[chave].entrada = Number(db[chave].entrada || 0);
+
+    return db[chave];
+  }
+
+  function atual() {
+    return garantirPeriodo(chavePeriodo());
+  }
+
+  function salvarBanco() {
+    localStorage.setItem("dbfin", JSON.stringify(db));
+  }
+
+  function br(val) {
+    return Number(val || 0).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+  }
+
+  function formatarData(dataISO) {
+    if (!dataISO) return "-";
+    const partes = dataISO.split("-");
+    if (partes.length !== 3) return dataISO;
+    return partes[2] + "/" + partes[1] + "/" + partes[0];
+  }
+
+  function escapeHTML(texto) {
+    return String(texto || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function toast(texto) {
+    msg.innerHTML = '<div class="toast">' + escapeHTML(texto) + '</div>';
+    setTimeout(function() {
+      msg.innerHTML = "";
+    }, 2200);
+  }
 
 
-      if (
-        tipo.value ===
-        "Receita"
-      ) {
+  /* =====================================================
+     AÇÕES DE BOTÕES
+  ===================================================== */
 
-        atual()
-          .receitas
-          .push(
-            lancamento
-          );
+  function salvarEntradas() {
+    const valorEntrada = parseNumero(entrada.value);
 
-      } else {
+    if (valorEntrada < 0) {
+      toast("Informe um valor válido.");
+      return;
+    }
 
-        atual()
-          .despesas
-          .push(
-            lancamento
-          );
+    atual().entrada = valorEntrada;
+    salvarBanco();
+    render();
+    toast("Entradas salvas com sucesso!");
+  }
 
-      }
+  function exportarCSV() {
+    const periodo = atual();
 
+    if (periodo.receitas.length === 0 && periodo.despesas.length === 0) {
+      toast("Não há lançamentos neste mês para exportar.");
+      return;
+    }
 
-      salvarBanco();
+    let csvContent = "Tipo;Data;Descrição;Categoria/Parcela;Valor (R$)\n";
 
-      render();
+    periodo.receitas.forEach(item => {
+      const dataFmt = formatarData(item.data);
+      const desc = `"${item.descricao.replace(/"/g, '""')}"`;
+      const cat = `"${item.parcela}"`;
+      const valorFmt = item.valor.toFixed(2).replace(".", ",");
+      csvContent += `Receita;${dataFmt};${desc};${cat};${valorFmt}\n`;
+    });
 
-      descricao.value = "";
+    periodo.despesas.forEach(item => {
+      const dataFmt = formatarData(item.data);
+      const desc = `"${item.descricao.replace(/"/g, '""')}"`;
+      const cat = `"${item.parcela}"`;
+      const valorFmt = item.valor.toFixed(2).replace(".", ",");
+      csvContent += `Despesa;${dataFmt};${desc};${cat};${valorFmt}\n`;
+    });
 
-      valor.value = "";
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
 
+    const link = document.createElement("a");
+    const nomeArquivo = `financas_${mes.value.padStart(2, "0")}_${ano.value}.csv`;
+
+    link.setAttribute("href", url);
+    link.setAttribute("download", nomeArquivo);
+    document.body.appendChild(link);
+    
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    toast("Arquivo CSV baixado!");
+  }
+
+  function adicionarLancamento() {
+    const descricaoTexto = descricao.value.trim();
+    const valorNumero = parseNumero(valor.value);
+
+    if (!data.value) {
+      toast("Informe a data do lançamento.");
+      data.focus();
+      return;
+    }
+
+    if (!descricaoTexto) {
+      toast("Digite uma descrição.");
       descricao.focus();
-
-      toast(
-        "Lançamento salvo!"
-      );
-
+      return;
     }
 
-
-    /* =========================
-       ÚLTIMA AÇÃO
-    ========================== */
-
-    let last = null;
-
-
-    /* =========================
-       EXCLUIR RECEITA
-    ========================== */
-
-    function excluirReceita(
-      indice
-    ) {
-
-      const lista =
-        atual().receitas;
-
-
-      if (
-        !lista[indice]
-      ) {
-
-        return;
-
-      }
-
-
-      if (
-        !confirm(
-          "Deseja excluir esta receita?"
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      last = {
-
-        tipo: "receita",
-
-        acao: "excluir",
-
-        indice: indice,
-
-        objeto:
-          {
-            ...lista[indice]
-          }
-
-      };
-
-
-      lista.splice(
-        indice,
-        1
-      );
-
-
-      salvarBanco();
-
-      render();
-
-      toast(
-        "Receita excluída!"
-      );
-
+    if (valorNumero <= 0) {
+      toast("Digite um valor válido.");
+      valor.focus();
+      return;
     }
 
+    // Se a data escolhida for de outro mês/ano, ajusta o filtro automaticamente
+    const partes = data.value.split("-");
+    if (partes.length === 3) {
+      const anoData = String(Number(partes[0]));
+      const mesData = String(Number(partes[1]));
 
-    /* =========================
-       EXCLUIR DESPESA
-    ========================== */
-
-    function excluirDespesa(
-      indice
-    ) {
-
-      const lista =
-        atual().despesas;
-
-
-      if (
-        !lista[indice]
-      ) {
-
-        return;
-
+      if (mes.value !== mesData || ano.value !== anoData) {
+        mes.value = mesData;
+        ano.value = anoData;
       }
-
-
-      if (
-        !confirm(
-          "Deseja excluir esta despesa?"
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      last = {
-
-        tipo: "despesa",
-
-        acao: "excluir",
-
-        indice: indice,
-
-        objeto:
-          {
-            ...lista[indice]
-          }
-
-      };
-
-
-      lista.splice(
-        indice,
-        1
-      );
-
-
-      salvarBanco();
-
-      render();
-
-      toast(
-        "Despesa excluída!"
-      );
-
     }
 
+    const lancamento = {
+      id: Date.now().toString() + Math.random().toString(36).substring(2),
+      data: data.value,
+      descricao: descricaoTexto,
+      valor: valorNumero,
+      parcela: parcela.value
+    };
 
-    /* =========================
-       EDITAR DESPESA
-    ========================== */
+    const periodo = atual();
 
-    function editarDespesa(
-      indice,
-      novoValor
-    ) {
-
-      const lista =
-        atual().despesas;
-
-
-      if (
-        !lista[indice]
-      ) {
-
-        return;
-
-      }
-
-
-      const valorAnterior =
-        lista[indice].valor;
-
-
-      const novo =
-        Number(
-          novoValor || 0
-        );
-
-
-      if (
-        novo < 0
-      ) {
-
-        return;
-
-      }
-
-
-      last = {
-
-        tipo: "despesa",
-
-        acao: "editar",
-
-        indice: indice,
-
-        objeto:
-          {
-            ...lista[indice]
-          }
-
-      };
-
-
-      lista[indice].valor =
-        novo;
-
-
-      salvarBanco();
-
-      render();
-
+    if (tipo.value === "Receita") {
+      periodo.receitas.push(lancamento);
+    } else {
+      periodo.despesas.push(lancamento);
     }
 
+    salvarBanco();
+    render();
 
-    /* =========================
-       DESFAZER
-    ========================== */
+    descricao.value = "";
+    valor.value = "";
+    descricao.focus();
 
-    function desfazer() {
-
-      if (!last) {
-
-        toast(
-          "Nada para desfazer."
-        );
-
-        return;
-
-      }
+    toast(tipo.value === "Receita" ? "Receita adicionada!" : "Despesa adicionada!");
+  }
 
 
-      const periodo =
-        atual();
+  /* =====================================================
+     DESFAZER E EDIÇÃO
+  ===================================================== */
 
+  let ultimaAcao = null;
 
-      if (
-        last.acao ===
-        "excluir"
-      ) {
+  function excluirReceita(indice) {
+    const periodo = atual();
+    const item = periodo.receitas[indice];
+    if (!item) return;
 
-        if (
-          last.tipo ===
-          "receita"
-        ) {
+    if (!confirm('Deseja excluir a receita "' + item.descricao + '"?')) return;
 
-          periodo.receitas.splice(
-            last.indice,
-            0,
-            last.objeto
-          );
+    ultimaAcao = { tipo: "receita", acao: "excluir", indice: indice, item: { ...item } };
+    periodo.receitas.splice(indice, 1);
+    salvarBanco();
+    render();
+    toast("Receita excluída!");
+  }
 
-        } else {
+  function excluirDespesa(indice) {
+    const periodo = atual();
+    const item = periodo.despesas[indice];
+    if (!item) return;
 
-          periodo.despesas.splice(
-            last.indice,
-            0,
-            last.objeto
-          );
+    if (!confirm('Deseja excluir a despesa "' + item.descricao + '"?')) return;
 
-        }
+    ultimaAcao = { tipo: "despesa", acao: "excluir", indice: indice, item: { ...item } };
+    periodo.despesas.splice(indice, 1);
+    salvarBanco();
+    render();
+    toast("Despesa excluída!");
+  }
 
-      }
+  function editarReceita(indice) {
+    const periodo = atual();
+    const item = periodo.receitas[indice];
+    if (!item) return;
 
+    const novaDescricao = prompt("Descrição da receita:", item.descricao);
+    if (novaDescricao === null) return;
 
-      if (
-        last.acao ===
-        "editar"
-      ) {
+    const novoValorTexto = prompt("Valor da receita:", item.valor);
+    if (novoValorTexto === null) return;
 
-        periodo.despesas[
-          last.indice
-        ] =
-          last.objeto;
+    const novoValor = parseNumero(novoValorTexto);
 
-      }
-
-
-      salvarBanco();
-
-      render();
-
-      toast(
-        "Ação desfeita!"
-      );
-
-
-      last = null;
-
+    if (!novaDescricao.trim() || novoValor <= 0) {
+      alert("Informe dados válidos.");
+      return;
     }
 
+    ultimaAcao = { tipo: "receita", acao: "editar", indice: indice, item: { ...item } };
+    item.descricao = novaDescricao.trim();
+    item.valor = novoValor;
 
-    /* =========================
-       RENDERIZAR
-    ========================== */
+    salvarBanco();
+    render();
+    toast("Receita alterada!");
+  }
 
-    function render() {
+  function editarDespesa(indice) {
+    const periodo = atual();
+    const item = periodo.despesas[indice];
+    if (!item) return;
 
-      const periodo =
-        atual();
+    const novaDescricao = prompt("Descrição da despesa:", item.descricao);
+    if (novaDescricao === null) return;
+
+    const novoValorTexto = prompt("Valor da despesa:", item.valor);
+    if (novoValorTexto === null) return;
+
+    const novoValor = parseNumero(novoValorTexto);
+
+    if (!novaDescricao.trim() || novoValor <= 0) {
+      alert("Informe dados válidos.");
+      return;
+    }
+
+    ultimaAcao = { tipo: "despesa", acao: "editar", indice: indice, item: { ...item } };
+    item.descricao = novaDescricao.trim();
+    item.valor = novoValor;
+
+    salvarBanco();
+    render();
+    toast("Despesa alterada!");
+  }
+
+  function desfazer() {
+    if (!ultimaAcao) {
+      toast("Não há nenhuma ação para desfazer.");
+      return;
+    }
+
+    const periodo = atual();
+
+    if (ultimaAcao.acao === "excluir") {
+      if (ultimaAcao.tipo === "receita") {
+        periodo.receitas.splice(ultimaAcao.indice, 0, ultimaAcao.item);
+      } else {
+        periodo.despesas.splice(ultimaAcao.indice, 0, ultimaAcao.item);
+      }
+    } else if (ultimaAcao.acao === "editar") {
+      if (ultimaAcao.tipo === "receita") {
+        periodo.receitas[ultimaAcao.indice] = { ...ultimaAcao.item };
+      } else {
+        periodo.despesas[ultimaAcao.indice] = { ...ultimaAcao.item };
+      }
+    }
+
+    salvarBanco();
+    render();
+    toast("Ação desfeita!");
+    ultimaAcao = null;
+  }
 
 
-      /*
-       * Entrada
-       */
+  /* =====================================================
+     RENDERIZAR TELA
+  ===================================================== */
 
-      entrada.value =
-        periodo.entrada ||
-        "";
+  function render() {
+    const periodo = atual();
+
+    entrada.value = periodo.entrada || "";
+
+    const somaReceitas = periodo.receitas.reduce((acc, r) => acc + Number(r.valor || 0), 0);
+    const somaDespesas = periodo.despesas.reduce((acc, d) => acc + Number(d.valor || 0), 0);
+    const totalEntradasCalculado = Number(periodo.entrada || 0) + somaReceitas;
+    const saldoCalculado = totalEntradasCalculado - somaDespesas;
+
+    totalEntradas.textContent = br(totalEntradasCalculado);
+    saidas.textContent = br(somaDespesas);
+    saldo.textContent = br(saldoCalculado);
+
+    // Renderiza Receitas
+    if (periodo.receitas.length === 0) {
+      trec.innerHTML = '<tr><td colspan="4" class="vazio">Nenhum lançamento.</td></tr>';
+    } else {
+      trec.innerHTML = periodo.receitas.map((item, index) => `
+        <tr>
+          <td class="data-coluna">${formatarData(item.data)}</td>
+          <td>${escapeHTML(item.descricao)} <small>(${escapeHTML(item.parcela)})</small></td>
+          <td>${br(item.valor)}</td>
+          <td>
+            <div class="acoes">
+              <button type="button" class="btn-edit" onclick="editarReceita(${index})">✏️</button>
+              <button type="button" class="btn-delete" onclick="excluirReceita(${index})">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Renderiza Despesas
+    if (periodo.despesas.length === 0) {
+      tdes.innerHTML = '<tr><td colspan="4" class="vazio">Nenhum lançamento.</td></tr>';
+    } else {
+      tdes.innerHTML = periodo.despesas.map((item, index) => `
+        <tr>
+          <td class="data-coluna">${formatarData(item.data)}</td>
+          <td>${escapeHTML(item.descricao)} <small>(${escapeHTML(item.parcela)})</small></td>
+          <td>${br(item.valor)}</td>
+          <td>
+            <div class="acoes">
+              <button type="button" class="btn-edit" onclick="editarDespesa(${index})">✏️</button>
+              <button type="button" class="btn-delete" onclick="excluirDespesa(${index})">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+  }
 
 
-      totalEntradas.innerT
+  /* =====================================================
+     VÍNCULO DE EVENTOS
+  ===================================================== */
+
+  window.excluirReceita = excluirReceita;
+  window.excluirDespesa = excluirDespesa;
+  window.editarReceita = editarReceita;
+  window.editarDespesa = editarDespesa;
+
+  btnSalvarEntrada.onclick = salvarEntradas;
+  btnExportarCSV.onclick = exportarCSV;
+  btnAdicionar.onclick = adicionarLancamento;
+  btnDesfazer.onclick = desfazer;
+
+  mes.onchange = render;
+  ano.onchange = render;
+
+  /* Executa primeiro render */
+  render();
+}
+
+/* Execução segura do Script */
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", iniciarApp);
+} else {
+  iniciarApp();
+}
+
+</script>
+
+</body>
+
+</html>
